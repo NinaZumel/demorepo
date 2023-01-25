@@ -231,8 +231,11 @@ def get_pipeline(name):
 
 # Login to local Wallaroo instance
 
-wallarooPrefix = "squishy-wallaroo-6187"
-wallarooSuffix = "wallaroo.dev"
+wallarooPrefix = "beautiful-platypus-3587"
+wallarooSuffix = "wallaroo.community"
+
+# wallarooPrefix = "squishy-wallaroo-6187"
+# wallarooSuffix = "wallaroo.dev"
  
 wl = wallaroo.Client(api_endpoint=f"https://{wallarooPrefix}.api.{wallarooSuffix}", 
                     auth_endpoint=f"https://{wallarooPrefix}.keycloak.{wallarooSuffix}", 

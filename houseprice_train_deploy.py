@@ -40,7 +40,7 @@ print(query)
 # read in the data
 housing_data = pd.read_sql_query(query, conn)
 
-conn.close()
+# conn.close()
 housing_data
 
 # COMMAND ----------
@@ -294,6 +294,38 @@ pipeline
 
 # COMMAND ----------
 
+# do a test inference
+
+# create the query
+query = f"select * from {simdb.tablename} where date > DATE(DATE(), '-1 month') AND sale_price is NULL LIMIT 5"
+print(query)
+
+# read in the data
+newbatch = pd.read_sql_query(query, conn)
+newbatch.shape
+
+
+# COMMAND ----------
+
+query = {'query': newbatch.to_json()}
+result = pipeline.infer(query)[0]
+predicted_prices = result.data()[0]
+predicted_prices
+
+# COMMAND ----------
+
+# Create a table that links the house listing id to the predicted price
+
+result_table = pd.DataFrame({
+    'id': newbatch['id'],
+    'saleprice_estimate': predicted_prices,
+})
+ 
+result_table
+
+# COMMAND ----------
+
+conn.close()
 pipeline.undeploy()
 
 # COMMAND ----------

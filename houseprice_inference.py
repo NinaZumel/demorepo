@@ -48,7 +48,7 @@ _ = wl.set_current_workspace(new_workspace)
 
 # COMMAND ----------
 
-pipeline = wl.pipelines_by_name("housing-pipe")[-1]
+pipeline = wl.pipelines_by_name("housing-pipe")[0]
 pipeline.deploy()
 
 # COMMAND ----------
